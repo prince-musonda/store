@@ -16,6 +16,11 @@
   }
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -24,4 +29,13 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  background-repeat: no-repeat;
+}
+
+.primary-btn {
+  background-color: rgba(21, 21, 21, 0.965);
+  color: white;
+  border: 1px white;
+  padding: 0.2rem 1rem;
+  border-radius: 5px;
 }
