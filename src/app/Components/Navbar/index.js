@@ -29,6 +29,11 @@ export default function NavBar() {
         />
       </Link>
 
+      {/* Search button link */}
+      <Link href="/search">
+        <Image src="/bag-shopping.svg" width={20} height={20} alt="search" />
+      </Link>
+
       {/* menu-btn for small screen devices.
       menu btn is automatically hidden on large screen and vice verser.
       when it's clicked and the state, "showmenu", changes, menu-btn is hidden on small screns

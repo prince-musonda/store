@@ -1,0 +1,29 @@
+.search-bar {
+  text-align: center;
+  font-size: 1.2rem;
+  width: 50%;
+  padding-left: 0.5rem;
+  border-radius: 1rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* change default outline border settings when in focus*/
+.search-bar:focus {
+  outline: 1px solid gray;
+}
+
+.search-btn {
+  background-color: rgba(0, 0, 0, 0.914);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border: 2px solid rgb(0, 0, 0, 0.914);
+}
+
+@media only screen and (max-width: 600px) {
+  .search-bar {
+    flex: 1;
+  }
+}
