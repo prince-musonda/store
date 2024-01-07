@@ -31,7 +31,7 @@ export default function NavBar() {
 
       {/* Search button link */}
       <Link href="/search">
-        <Image src="/bag-shopping.svg" width={20} height={20} alt="search" />
+        <Image src="/search-icon.svg" width={20} height={20} alt="search" />
       </Link>
 
       {/* menu-btn for small screen devices.
