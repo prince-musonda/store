@@ -1,17 +1,13 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
+import BuyNowButton from "../BuyNowButton";
+import AddToCartButton from "../AddToCartButton";
 // to use ProductCard componet, just provide the following props:
 // 1) id
 // 2) imagesUrl
 // 3) productName
 // 4) price
 export default function ProductCard(props) {
-  const addToCartHandler = () => {
-    // do something
-  };
-
   const buyNowHandler = () => {
     // do something
   };
@@ -32,13 +28,8 @@ export default function ProductCard(props) {
         <p className="font-bold text-black">K{props.price}</p>
       </Link>
       <div className="flex justify-space-evenly gap-4">
-        <button className="primary-btn whitepace-nowrap">Buy Now</button>
-        <button
-          className="primary-btn whitepace-nowrap"
-          onClick={addToCartHandler}
-        >
-          Add to Cart
-        </button>
+        <BuyNowButton productId={props.id} />
+        <AddToCartButton productId={props.id} />
       </div>
     </div>
   );
