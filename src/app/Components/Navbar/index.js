@@ -22,7 +22,7 @@ export default function NavBar() {
       {/* shopping cart */}
       <Link href="/cart">
         <Image
-          src="/bag-shopping.svg"
+          src="/cart-shopping.svg"
           width={20}
           height={20}
           alt="shopping bag"

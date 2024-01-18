@@ -8,10 +8,6 @@ import AddToCartButton from "../AddToCartButton";
 // 3) productName
 // 4) price
 export default function ProductCard(props) {
-  const buyNowHandler = () => {
-    // do something
-  };
-
   return (
     <div className="flex bg-white p-4 flex-col justify-between shadow-lg">
       <Link

@@ -7,18 +7,29 @@ import "./styles.css";
 // 2) productName
 // 3) price
 // 4) quantity
+// 5) id
 export default function CartItemCard(props) {
   const [quantity, setQuantity] = useState(1);
-  function increaseQty() {
+
+  const  increaseQty = () => {
     // increase quantity
     setQuantity(quantity + 1);
   }
-  function reduceQty() {
+  const reduceQty = () => {
     // reduce quantity
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   }
+
+  const removeFromCart = ()=> {
+
+  }
+
+  const buyNow = ()=>{
+
+  }
+
   return (
     <div className="flex justify-between gap-4 align-center bg-white py-2 px-4 mb-4 shadow-lg">
       {/* product image */}

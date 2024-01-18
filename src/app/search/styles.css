@@ -25,5 +25,9 @@
 @media only screen and (max-width: 600px) {
   .search-bar {
     flex: 1;
+    font-size: 0.8rem;
+  }
+  .search-btn {
+    font-size: 0.8rem;
   }
 }
