@@ -1,6 +1,9 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./Components/Navbar";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const roboto = Roboto({
   weight: ["100", "300"],
@@ -16,8 +19,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <NavBar />
-        {children}
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
+        <AuthContextProvider>
+          <NavBar />
+          {children}
+        </AuthContextProvider>
       </body>
     </html>
   );

@@ -3,9 +3,8 @@ import NavBar from "./Components/Navbar";
 import ProductCard from "./Components/Product_card";
 
 async function getProducts() {
-  const serverAddress = process.env.SERVER_ADDRESS;
-  console.log(serverAddress);
-  const res = await fetch(`${serverAddress}/products`, { cache: "no-store" });
+  const api_url = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${api_url}/products`, { cache: "no-store" });
   if (!res.ok) {
     return [];
   }

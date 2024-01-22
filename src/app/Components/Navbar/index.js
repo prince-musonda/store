@@ -4,8 +4,10 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { navItemsList } from "./utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import "./style.css";
+import useAuthContextProvider from "@/app/hooks/useAuthContextProvider";
 
 export default function NavBar() {
   // get current url path
@@ -13,7 +15,18 @@ export default function NavBar() {
   const currentUrl = usePathname();
   // creating state for hiding and showing a responsive navbar on small screens
   const [showMenu, setShowMenu] = useState(false);
-  const [isLoggedin, setIsLoggedIn] = useState(true);
+  const { usersAuthToken, updateStoredAuthToken } = useAuthContextProvider();
+  const [isLoggedin, setIsLoggedIn] = useState(usersAuthToken ? true : false);
+
+  useEffect(() => {
+    // check for Authentication token once the page is loaded
+    let token = localStorage.getItem("token");
+    // update state and save token if not expired to localStorage or delete token if expired
+    // using updateStoredAuthToken function
+    updateStoredAuthToken(token);
+    setIsLoggedIn(usersAuthToken ? true : false);
+  }, [usersAuthToken]);
+
   return (
     <nav className={"nav-container"}>
       <Link href="/" className="logo-text">
@@ -69,18 +82,16 @@ export default function NavBar() {
           <button
             className="primary-btn"
             onClick={() => {
-              console.log("clicking");
-              console.log(isLoggedin);
+              localStorage.removeItem("token");
               setIsLoggedIn(false);
-              console.log(isLoggedin);
             }}
           >
             Log out
           </button>
         ) : (
-          <button className="primary-btn" onClick={() => {}}>
-            Sign in
-          </button>
+          <Link className="primary-btn" href={"/login"}>
+            Log In
+          </Link>
         )}
 
         {/* close-menu-btn for closing menu on small screens.

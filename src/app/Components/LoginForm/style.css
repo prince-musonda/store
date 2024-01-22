@@ -1,0 +1,42 @@
+.login-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.login-form {
+  @apply bg-blue-500 p-10 rounded-md;
+}
+
+.login-form section,
+label,
+input {
+  width: 100%;
+}
+
+.login-form section {
+  margin-bottom: 3rem;
+}
+
+.login-form label {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.logIn-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logIn-btn-container button {
+  background-color: white;
+  color: rgb(0, 140, 255);
+  padding: 0.3rem 1rem;
+  font-weight: bold;
+  border-radius: 1rem;
+}
+
+.login-form input {
+  padding: 5px 10px;
+}
