@@ -8,7 +8,9 @@ async function getProducts() {
   if (!res.ok) {
     return [];
   }
-  return res.json();
+
+  const products = res.json();
+  return products;
 }
 
 export default async function Home() {
@@ -18,10 +20,10 @@ export default async function Home() {
       <div className="flex gap-2 flex-wrap justify-center">
         {products.map((product) => (
           <ProductCard
-            key={product.id}
+            key={product._id}
             productName={product.productName}
             price={product.price}
-            id={product.id}
+            productId={product._id}
             imagesUrl={product.imagesUrl}
           />
         ))}

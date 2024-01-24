@@ -20,5 +20,10 @@ export default function useAuthContextProvider() {
     }
   }
 
-  return { usersAuthToken, updateStoredAuthToken };
+  function logout() {
+    setUsersAuthToken("");
+    localStorage.removeItem("token");
+  }
+
+  return { usersAuthToken, updateStoredAuthToken, logout };
 }

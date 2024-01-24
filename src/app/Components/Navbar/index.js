@@ -15,7 +15,8 @@ export default function NavBar() {
   const currentUrl = usePathname();
   // creating state for hiding and showing a responsive navbar on small screens
   const [showMenu, setShowMenu] = useState(false);
-  const { usersAuthToken, updateStoredAuthToken } = useAuthContextProvider();
+  const { usersAuthToken, updateStoredAuthToken, logout } =
+    useAuthContextProvider();
   const [isLoggedin, setIsLoggedIn] = useState(usersAuthToken ? true : false);
 
   useEffect(() => {
@@ -83,6 +84,7 @@ export default function NavBar() {
             className="primary-btn"
             onClick={() => {
               localStorage.removeItem("token");
+              logout();
               setIsLoggedIn(false);
             }}
           >

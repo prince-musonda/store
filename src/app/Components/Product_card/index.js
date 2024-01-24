@@ -11,7 +11,7 @@ export default function ProductCard(props) {
   return (
     <div className="flex bg-white p-4 flex-col justify-between shadow-lg">
       <Link
-        href={`/product/id/${props.id}`}
+        href={`/product/id/${props.productId}`}
         className="flex flex-col justify-evenly grow"
       >
         <Image
@@ -24,8 +24,11 @@ export default function ProductCard(props) {
         <p className="font-bold text-black">K{props.price}</p>
       </Link>
       <div className="flex justify-space-evenly gap-4">
-        <BuyNowButton productId={props.id} />
-        <AddToCartButton productId={props.id} />
+        <BuyNowButton productId={props.productId} />
+        <AddToCartButton
+          productId={props.productId}
+          productName={props.productName}
+        />
       </div>
     </div>
   );
