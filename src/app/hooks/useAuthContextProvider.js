@@ -16,12 +16,12 @@ export default function useAuthContextProvider() {
     } else {
       // if expired, delete any stored token
       localStorage.removeItem("token");
-      setUsersAuthToken("");
+      setUsersAuthToken(null);
     }
   }
 
   function logout() {
-    setUsersAuthToken("");
+    setUsersAuthToken(null);
     localStorage.removeItem("token");
   }
 

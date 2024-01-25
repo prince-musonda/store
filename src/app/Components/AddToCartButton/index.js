@@ -18,6 +18,9 @@ export default function AddToCartButton({ productId, productName }) {
   const goToLoginPage = () => {
     router.push("/login");
   };
+
+  // ######################################################################
+  // ###############################################################################
   const addToCartHandler = async () => {
     setShowLoadingAnimation(true);
     // when user isn't authenticated or logged in
@@ -31,7 +34,6 @@ export default function AddToCartButton({ productId, productName }) {
     try {
       const res = await httpAddtoCart({
         productId,
-        productName,
         usersAuthToken,
       });
       // when successfull added
@@ -55,6 +57,10 @@ export default function AddToCartButton({ productId, productName }) {
     }
     setShowLoadingAnimation(false);
   };
+
+  // #####################################################################
+  // #############################################################################
+  // ###################################################################################
 
   // when making the request to add to cart
   if (showLoadingAnimation) {

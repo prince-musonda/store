@@ -56,6 +56,7 @@ export default function LoginForm() {
         }
       } catch (error) {
         showErrorNotification(error);
+        showErrorNotification("Something went wrong");
       }
     }
     // response to invalid user input

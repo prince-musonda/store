@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
+import clsx from "clsx";
 import "./styles.css";
 
 // to use the CartItemCard, jsut provide the following props
-// 1) imagesUrl
+// 1) image
 // 2) productName
 // 3) price
 // 4) quantity
@@ -11,35 +12,49 @@ import "./styles.css";
 export default function CartItemCard(props) {
   const [quantity, setQuantity] = useState(1);
 
-  const  increaseQty = () => {
+  const [disableButton, setDisableButton] = useState(
+    quantity < 1 ? true : false
+  );
+
+  const increaseQty = () => {
     // increase quantity
-    setQuantity(quantity + 1);
-  }
+    setQuantity(+quantity + 1);
+  };
   const reduceQty = () => {
     // reduce quantity
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      setQuantity(+quantity - 1);
     }
-  }
+  };
 
-  const removeFromCart = ()=> {
+  const onChangeHandler = (e) => {
+    if (
+      isNaN(e.target.value) ||
+      e.target.value.trim() == "" ||
+      e.target.value == "0"
+    ) {
+      setQuantity(e.target.value);
+      setDisableButton(true);
+    } else {
+      setQuantity(e.target.value);
+      setDisableButton(false);
+    }
+  };
 
-  }
+  const removeFromCart = () => {};
 
-  const buyNow = ()=>{
-
-  }
+  const buyNow = () => {};
 
   return (
-    <div className="flex justify-between gap-4 align-center bg-white py-2 px-4 mb-4 shadow-lg">
+    <div className="flex  flex-col lg:flex-row md:flex-row justify-between gap-4 items-center  bg-white py-2 px-4 mb-4 shadow-lg">
       {/* product image */}
       <Image
-        src={props.imagesUrl[0]}
+        src={props.image}
         alt={props.productName}
-        width={100}
-        height={100}
+        width={200}
+        height={200}
       />
-      <section className="md:flex md:flex-1 md:justify-evenly">
+      <section className="md:flex md:flex-1 md:justify-between gap-2">
         {/* product details */}
         <div>
           <h3>{props.productName}</h3>
@@ -49,23 +64,44 @@ export default function CartItemCard(props) {
           <h3 className="font-bold">total cost: K{props.price * quantity}</h3>
         </div>
 
-        {/* action button: delete button, increase and reduce quantity btn, and buy now button */}
+        {/* action buttons: delete button, increase and reduce quantity btn, and buy now button */}
         <div className="flex flex-col">
-          {/* quantity control buttons */}
-          <div>
+          {/* quantity control section */}
+          <div className="flex">
             <span>Quantity: </span>
-            <button className="quantity-btn" onClick={increaseQty}>
-              +
-            </button>
-            <span className="quantity-text">{quantity}</span>
             <button className="quantity-btn" onClick={reduceQty}>
-              -
+              <Image
+                src="/left-arrow.svg"
+                width={22}
+                height={22}
+                alt="left allow"
+              />
+            </button>
+            <input
+              type="number"
+              value={quantity}
+              onChange={onChangeHandler}
+              min="1"
+              className="quantity-input"
+            />
+            <button className="quantity-btn" onClick={increaseQty}>
+              <Image
+                src="/right-arrow.svg"
+                width={30}
+                height={30}
+                alt="right allow"
+              />
             </button>
           </div>
           {/* delete item from cart item and buy right now buttons*/}
           <div className="mt-2">
             <button className="primary-btn mr-2">Remove</button>
-            <button className="primary-btn">Buy Now</button>
+            <button
+              className={clsx(disableButton ? "disabled" : "primary-btn")}
+              disabled={disableButton}
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </section>
