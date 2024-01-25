@@ -8,7 +8,8 @@ import "./styles.css";
 // 2) productName
 // 3) price
 // 4) quantity
-// 5) id
+// 5) productId
+// 6) and the onRemoveHandler function that runs when the "remove btn" is clicked
 export default function CartItemCard(props) {
   const [quantity, setQuantity] = useState(1);
 
@@ -18,12 +19,12 @@ export default function CartItemCard(props) {
 
   const increaseQty = () => {
     // increase quantity
-    setQuantity(+quantity + 1);
+    setQuantity(Number(quantity) + 1);
   };
   const reduceQty = () => {
     // reduce quantity
     if (quantity > 1) {
-      setQuantity(+quantity - 1);
+      setQuantity(Number(quantity) - 1);
     }
   };
 
@@ -41,7 +42,12 @@ export default function CartItemCard(props) {
     }
   };
 
-  const removeFromCart = () => {};
+  const removeFromCart = () => {
+    // remove item from cart using the prop "onRemoveHander"
+    // that will be passed to product card
+    const { productId, onRemoveHandler } = props;
+    onRemoveHandler(productId);
+  };
 
   const buyNow = () => {};
 
@@ -95,7 +101,9 @@ export default function CartItemCard(props) {
           </div>
           {/* delete item from cart item and buy right now buttons*/}
           <div className="mt-2">
-            <button className="primary-btn mr-2">Remove</button>
+            <button className="primary-btn mr-2" onClick={removeFromCart}>
+              Remove
+            </button>
             <button
               className={clsx(disableButton ? "disabled" : "primary-btn")}
               disabled={disableButton}

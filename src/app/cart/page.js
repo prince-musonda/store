@@ -7,16 +7,16 @@ import useAuthContextProvider from "../hooks/useAuthContextProvider";
 import { useEffect, useState } from "react";
 import httpGetUsersCart from "../utils/httpGetUsersChat";
 import LoadingAnimation2 from "../Components/LoadingAnimation2";
+import httpRemoveItemFromCart from "../utils/httpRemoveFromCart";
+import { showErrorNotification } from "../utils/Notifications";
 
 export default function CartPage() {
   const { usersAuthToken } = useAuthContextProvider();
-  console.log(usersAuthToken);
   const [usersCart, setUsersCart] = useState([]);
   const [showErrorMesaage, setShowErrorMessage] = useState(false);
   const [showLoadingAnimation, setShowLoadingAnimation] = useState(false);
 
   const getUsersCart = async () => {
-    console.log("getting users chart");
     setShowLoadingAnimation(true);
     if (usersAuthToken) {
       try {
@@ -31,6 +31,25 @@ export default function CartPage() {
     }
     setShowLoadingAnimation(false);
   };
+
+  const removeItemFromCart = async (productId) => {
+    try {
+      const res = await httpRemoveItemFromCart(usersAuthToken, productId);
+      if (res.success == true) {
+        // update usersCart
+        const newCart = usersCart.filter(
+          (cartItem) => cartItem.productId != productId
+        );
+        setUsersCart(newCart);
+      } else {
+        showErrorNotification("failed to remove the item from your cart");
+      }
+    } catch (e) {
+      // In cases where the app fails to make a request to the server
+      showErrorNotification("something went wrong");
+    }
+  };
+
   useEffect(() => {
     getUsersCart();
   }, [usersAuthToken]);
@@ -75,7 +94,9 @@ export default function CartPage() {
                 productName={cartItem.productName}
                 image={cartItem.image}
                 price={cartItem.price}
+                onRemoveHandler={removeItemFromCart}
                 key={cartItem.productId}
+                productId={cartItem.productId}
               />
             );
           })
