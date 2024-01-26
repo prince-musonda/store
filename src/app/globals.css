@@ -35,9 +35,19 @@ body {
 }
 
 .primary-btn {
-  @apply bg-blue-800;
+  @apply bg-blue-700;
   color: white;
   border: 1px white;
   padding: 0.2rem 1rem;
   border-radius: 5px;
+}
+
+.primary-btn:active {
+  opacity: 0.5;
+  scale: 0.7;
+}
+
+.primary-btn:hover {
+  scale: 1.15;
+  @apply bg-blue-600;
 }
