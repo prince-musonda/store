@@ -22,7 +22,6 @@ export default function CartPage() {
       try {
         const res = await httpGetUsersCart(usersAuthToken);
         const productsInCart = res.data.products;
-        console.log(res);
         setUsersCart(productsInCart || []);
       } catch (e) {
         console.error(e);
@@ -73,6 +72,7 @@ export default function CartPage() {
     return (
       <div className="flex flex-col justify-center items-center h-full">
         <p>Oops! Network connection Issues!!!</p>
+        <p>Check your connection and refresh the page</p>
       </div>
     );
   }
