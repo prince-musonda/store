@@ -21,7 +21,13 @@ export default function CartPage() {
     if (usersAuthToken) {
       try {
         const res = await httpGetUsersCart(usersAuthToken);
-        const productsInCart = res.data.products;
+        let productsInCart = res.data.products;
+        console.log(productsInCart);
+        // sort items: from recently added to oldest
+        productsInCart.sort(
+          (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+        );
+        console.log(productsInCart);
         setUsersCart(productsInCart || []);
       } catch (e) {
         console.error(e);
@@ -82,7 +88,7 @@ export default function CartPage() {
     return (
       <main>
         {showLoadingAnimation && <LoadingAnimation2 />}
-        <h2 className="text-xl font-bold text-gray-400">Your Shopping Cart</h2>
+        <h2 className="text-xl text-gray-600 mb-2">Your Shopping Cart</h2>
         {usersCart.length == 0 ? (
           <p className="h-[85vh] border-1 flex justify-center items-center text-xl font-bold text-gray-700">
             Your Cart is empty
