@@ -51,3 +51,10 @@ body {
   scale: 1.15;
   @apply bg-blue-600;
 }
+
+.disabled {
+  background-color: gray;
+  color: rgba(255, 255, 255, 0.653);
+  border-radius: 5px;
+  padding: 0.2rem 0.9rem;
+}
