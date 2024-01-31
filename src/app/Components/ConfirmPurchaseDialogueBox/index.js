@@ -4,21 +4,76 @@ import { useState } from "react";
 import clsx from "clsx";
 import "./style.css";
 import { deliveryAddresses } from "./utils";
+import useAuthContextProvider from "@/app/hooks/useAuthContextProvider";
+import httpAddNewOrder from "@/app/utils/httpAddNewOrder";
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from "@/app/utils/Notifications";
+import LoadingAnimation from "../LoadingAnimation";
 
 export default function ConfirmPurchaseDialogueBox(props) {
-  const [deliveryAdress, setDeliveryAdress] = useState("");
+  const { usersAuthToken } = useAuthContextProvider();
+  const [deliveryAddress, setDeliveryAddress] = useState("");
   const [contactDetail, setContactDetail] = useState("");
+  const [showLoadingAnimation, setShowLoadingAnimation] = useState(false);
 
   const addressChangeHandler = (e) => {
-    setDeliveryAdress(e.target.value);
+    setDeliveryAddress(e.target.value);
   };
 
   const contactDetailChangeHandler = (e) => {
     setContactDetail(e.target.value);
   };
 
-  const cancelPurchaseHandler = () => {
+  const hideConfirmPurchaseComponent = () => {
     props.cancelPurchase();
+  };
+
+  const makePurchase = async () => {
+    // validation
+    if (!usersAuthToken) {
+      showErrorNotification("please login");
+    }
+    if (!deliveryAddress) {
+      showErrorNotification(
+        "Please select the closest location where you can pick the item from "
+      );
+    }
+    if (!contactDetail) {
+      showErrorNotification(
+        `please provide a phone number on which we can
+         contact you on regarding the delivery and your purchase`
+      );
+    }
+
+    if (contactDetail && usersAuthToken && deliveryAddress) {
+      try {
+        setShowLoadingAnimation(true);
+        const res = await httpAddNewOrder(usersAuthToken, {
+          contactDetail,
+          deliveryAddress,
+          productId: props.productId,
+          quantity: props.quantity,
+          size: props.size,
+        });
+        if (res.success == true) {
+          // hide the confirm purchase dialogue and just return to cart page
+          hideConfirmPurchaseComponent();
+          showSuccessNotification(res.message);
+        }
+        // else if request to make purchase or place order fails
+        // due reasons like a product no longer been in stock
+        else {
+          showErrorNotification(res.message);
+          console.log(res.message);
+        }
+      } catch (e) {
+        console.log(e);
+        showErrorNotification("failed to place order. Something went wrong!");
+      }
+    }
+    setShowLoadingAnimation(false);
   };
 
   return (
@@ -76,29 +131,43 @@ export default function ConfirmPurchaseDialogueBox(props) {
           <select
             className="location"
             name="location"
-            defaultValue={deliveryAdress}
+            defaultValue={deliveryAddress}
             onChange={addressChangeHandler}
           >
             <option></option>
             {deliveryAddresses.map((address) => {
-              return <option value={address}>{address}</option>;
+              return (
+                <option key={address} value={address}>
+                  {address}
+                </option>
+              );
             })}
           </select>
         </div>
 
         {/* confirm purchase btn and cancel btn */}
         <div className="mt-10">
-          <button className="primary-btn mr-10" onClick={cancelPurchaseHandler}>
+          {/* cancel btn */}
+          <button
+            className="primary-btn mr-10"
+            onClick={hideConfirmPurchaseComponent}
+          >
             Cancel
           </button>
-          <button
-            className={clsx(
-              deliveryAdress && contactDetail ? "primary-btn" : "disabled"
-            )}
-            disabled={deliveryAddresses ? false : true}
-          >
-            Confirm Purchase
-          </button>
+          {/* loading animation */}
+          {showLoadingAnimation && <LoadingAnimation />}
+          {/* confirm purchase btn */}
+          {!showLoadingAnimation && (
+            <button
+              className={clsx(
+                deliveryAddress && contactDetail ? "primary-btn" : "disabled"
+              )}
+              disabled={deliveryAddress && contactDetail ? false : true}
+              onClick={makePurchase}
+            >
+              Confirm Purchase
+            </button>
+          )}
         </div>
       </div>
     </div>

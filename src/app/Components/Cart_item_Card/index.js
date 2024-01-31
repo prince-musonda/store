@@ -69,6 +69,7 @@ export default function CartItemCard(props) {
           quantity={quantity}
           productName={props.productName}
           size={props.size}
+          productId={props.productId}
         />
       )}
       {/* product image */}
@@ -77,10 +78,6 @@ export default function CartItemCard(props) {
         alt={props.productName}
         width={200}
         height={200}
-        // hide image on when small screens when showing the confirmPurchase Diaglogue
-        // hidding the image will help provide more space for the confirmPurchase
-        // diaglogue when the device is rotated horizontally
-        className={clsx(showConfirmPurchaseDialogue && "sm2:hidden")}
       />
       <section className="md:flex md:flex-1 md:justify-between gap-2">
         {/* product details */}
