@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NavBar from "./Components/Navbar";
+import Carousel from "./Components/Carousel";
 import ProductCard from "./Components/Product_card";
 
 async function getProducts() {
@@ -15,8 +15,18 @@ async function getProducts() {
 
 export default async function Home() {
   const products = await getProducts();
+  const images = products[3].imagesUrl;
+  console.log(images);
   return (
-    <main>
+    <main className="flex justify-center items-center flex-col">
+      <div className="max-w-lg">
+        <Carousel autoSlide={true}>
+          {images.map((image) => {
+            return <img src={image} />;
+          })}
+        </Carousel>
+      </div>
+
       <div className="flex gap-2 flex-wrap justify-center">
         {products.map((product) => (
           <ProductCard
