@@ -46,7 +46,6 @@ export default function LoginForm() {
           // unsuccessfull account creation
           showErrorNotification(res.message);
         } else {
-          console.log("success");
           // if successful log in
           // store returned token in localstorage
           updateStoredAuthToken(res.data.token);

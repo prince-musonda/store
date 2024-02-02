@@ -55,6 +55,7 @@ export default function Carousel({
             {slides.map((_, i) => {
               return (
                 <div
+                  key={i}
                   className={`transition-all w-2 h-2 bg-white rounded-full ${
                     currentSlide == i ? "p-2" : "bg-opacity-50"
                   }`}

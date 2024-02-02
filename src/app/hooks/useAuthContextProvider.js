@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function useAuthContextProvider() {
   const { usersAuthToken, setUsersAuthToken } = useContext(AuthContext);
+  
   function updateStoredAuthToken(token) {
     // exit function when token is empty or not  provided
     if (!token) return;

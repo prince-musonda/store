@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Carousel from "./Components/Carousel";
 import ProductCard from "./Components/Product_card";
+import HeroSection from "./Components/HeroSection";
 
 async function getProducts() {
   const api_url = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
@@ -19,14 +20,7 @@ export default async function Home() {
   console.log(images);
   return (
     <main className="flex justify-center items-center flex-col">
-      <div className="max-w-lg">
-        <Carousel autoSlide={true}>
-          {images.map((image) => {
-            return <img src={image} />;
-          })}
-        </Carousel>
-      </div>
-
+      <HeroSection />
       <div className="flex gap-2 flex-wrap justify-center">
         {products.map((product) => (
           <ProductCard
