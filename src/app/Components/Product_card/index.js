@@ -11,13 +11,13 @@ export default function ProductCard(props) {
   return (
     <div className="flex bg-white p-4 flex-col justify-between items-center shadow-lg sm:min-w-full grow">
       <Link
-        href={`/product/id/${props.productId}`}
+        href={`/products/productId/${props.productId}`}
         className="flex flex-col justify-evenly grow"
       >
         <Image
           src={props.imagesUrl[0]}
-          width={200}
-          height={200}
+          width={300}
+          height={300}
           alt={props.productName}
         />
         <p className="font-bold text-gray-700">{props.productName}</p>

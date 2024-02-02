@@ -34,20 +34,24 @@ export default function Carousel({
         {slides}
       </div>
       <div className="absolute inset-0 flex items-center justify-between p-2">
-        {/* left arrow buttin */}
-        <button
-          onClick={previousSlide}
-          className="bg-white/80 shadow  rounded-full p-1 text-gray-800 hover:bg-white"
-        >
-          <ChevronLeft size={30} />
-        </button>
-        {/* right arrow button */}
-        <button
-          onClick={nextSlide}
-          className="bg-white/80 shadow  rounded-full p-1 text-gray-800 hover:bg-white"
-        >
-          <ChevronRight size={30} />
-        </button>
+        {/* show left arrow button if we have more than one slide*/}
+        {slides.length > 1 && (
+          <button
+            onClick={previousSlide}
+            className="bg-white/80 shadow  rounded-full p-1 text-gray-800 hover:bg-white"
+          >
+            <ChevronLeft size={30} />
+          </button>
+        )}
+        {/* show right arrow button if we have more than one slide*/}
+        {slides.length > 1 && (
+          <button
+            onClick={nextSlide}
+            className="bg-white/80 shadow  rounded-full p-1 text-gray-800 hover:bg-white"
+          >
+            <ChevronRight size={30} />
+          </button>
+        )}
 
         {/* carousl dots indicater */}
         <div className="absolute bottom-4 right-0 left-0">
