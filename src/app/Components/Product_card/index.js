@@ -9,7 +9,7 @@ import AddToCartButton from "../AddToCartButton";
 // 4) price
 export default function ProductCard(props) {
   return (
-    <div className="flex bg-white p-4 flex-col justify-between shadow-lg">
+    <div className="flex bg-white p-4 flex-col justify-between items-center shadow-lg sm:min-w-full grow">
       <Link
         href={`/product/id/${props.productId}`}
         className="flex flex-col justify-evenly grow"
