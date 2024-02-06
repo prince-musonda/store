@@ -5,7 +5,7 @@ export default function HeroSection() {
     <div className="w-full mb-5">
       <Carousel autoSlide={true} autoSlideInterval={10000}>
         <div
-          className="md:h-[80vh] h-[50vh] min-w-full flex flex-col justify-center items-center"
+          className="md:h-[80vh] h-[50vh] min-w-full  flex flex-col justify-center items-center"
           style={{
             backgroundImage: "url('/clothing_image.jpg')",
             backgroundPosition: "center",

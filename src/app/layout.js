@@ -1,9 +1,11 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { ToastContainer, Bounce } from "react-toastify";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./Components/Navbar";
 import { AuthContextProvider } from "./context/AuthContext";
+import ProgressBarProvider from "./Components/ProgressBarProvider";
 
 const roboto = Roboto({
   weight: ["100", "300"],
@@ -34,7 +36,8 @@ export default function RootLayout({ children }) {
         />
         <AuthContextProvider>
           <NavBar />
-          {children}
+          {/* progress Bar that shows during page navigation or route change */}
+          <ProgressBarProvider>{children}</ProgressBarProvider>
         </AuthContextProvider>
       </body>
     </html>

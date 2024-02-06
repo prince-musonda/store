@@ -10,6 +10,10 @@
   display: flex;
   justify-content: space-between;
 }
+.route-change-animation-container {
+  position: fixed;
+  top: 0.8em;
+}
 
 .logo-text {
   font-weight: bold;

@@ -2,16 +2,16 @@ export const navItemsList = [
   {
     id: "men",
     label: "Men",
-    path: "/products/men",
+    path: "/products/category/men",
   },
   {
     id: "women",
     label: "Women",
-    path: "/products/women",
+    path: "/products/category/women",
   },
   {
     id: "kids",
     label: "Kids",
-    path: "/products/kids",
+    path: "/products/category/kids",
   },
 ];
