@@ -6,7 +6,7 @@
 }
 
 .login-form {
-  @apply bg-blue-500 p-10 rounded-md;
+  @apply bg-gray-500 p-10 rounded-md;
 }
 
 .login-form section,

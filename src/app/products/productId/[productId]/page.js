@@ -25,16 +25,12 @@ export default async function ProductInfoPage({ params }) {
   return (
     <main className="md:max-w-[80vw] md:m-auto">
       <h1 className="text-2xl md:mb-5">{productName}</h1>
-      {/* image Carousel */}
-      <div className="bg-white rounded">
-        <div className="max-w-lg m-auto">
+      <div className="bg-white min-h-[300px]">
+        {/* image Carousel */}
+        <div className="bg-white rounded max-w-lg m-auto">
           <Carousel>
             {imagesUrl.map((image) => (
-              <img
-                src={image}
-                alt={productName}
-                style={{ minWidth: "200px", minHeight: "200px" }}
-              />
+              <img src={image} alt={productName} />
             ))}
           </Carousel>
         </div>

@@ -21,6 +21,7 @@ export default async function Home() {
   return (
     <main className="flex justify-center items-center flex-col">
       <HeroSection />
+      <h3 className="w-full text-gray-700 text-xl">Most trending products</h3>
       <div className="flex gap-2 flex-wrap justify-center">
         {products.map((product) => (
           <ProductCard

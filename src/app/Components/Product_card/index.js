@@ -14,7 +14,7 @@ export default function ProductCard({
   imagesUrl,
 }) {
   return (
-    <div className="flex bg-white p-4 flex-col justify-between items-center shadow-lg sm:min-w-full grow">
+    <div className="rounded-md flex bg-white p-4 flex-col justify-between items-center shadow-xl sm:min-w-full grow">
       <Link
         href={`/products/productId/${productId}`}
         className="flex flex-col justify-evenly grow"

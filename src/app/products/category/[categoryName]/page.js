@@ -53,7 +53,7 @@ export default async function ProductsPage({ params }) {
           {products.map((product) => {
             return (
               <ProductCard
-                productId={product.id}
+                productId={product._id}
                 productName={product.productName}
                 price={product.price}
                 imagesUrl={product.imagesUrl}

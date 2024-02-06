@@ -76,7 +76,7 @@ export default function CreateAccountPage() {
   return (
     <>
       <div className="form-container">
-        <form>
+        <form className="registration_form">
           {showLoadingAnimation && <LoadingAnimation2 />}
           <h1>Create an Account</h1>
           {/* first name */}
