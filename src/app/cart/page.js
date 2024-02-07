@@ -21,12 +21,14 @@ export default function CartPage() {
     if (usersAuthToken) {
       try {
         const res = await httpGetUsersCart(usersAuthToken);
-        let productsInCart = res.data.products;
-        console.log(productsInCart);
-        // sort items: from recently added to oldest
-        productsInCart.sort(
-          (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
-        );
+        let productsInCart = res?.data?.products;
+        if (productsInCart) {
+          // sort items: from recently added to oldest
+          productsInCart.sort(
+            (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+          );
+        }
+
         console.log(productsInCart);
         setUsersCart(productsInCart || []);
       } catch (e) {
