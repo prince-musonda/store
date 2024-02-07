@@ -4,20 +4,18 @@ import ProductCard from "./Components/Product_card";
 import HeroSection from "./Components/HeroSection";
 
 async function getProducts() {
-  const api_url = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${api_url}/products`, { cache: "no-store" });
-  if (!res.ok) {
+  try {
+    const api_url = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+    const res = await fetch(`${api_url}/products`, { cache: "no-store" });
+    const products = res.json();
+    return products;
+  } catch (e) {
     return [];
   }
-
-  const products = res.json();
-  return products;
 }
 
 export default async function Home() {
   const products = await getProducts();
-  const images = products[3].imagesUrl;
-  console.log(images);
   return (
     <main className="flex justify-center items-center flex-col">
       <HeroSection />
