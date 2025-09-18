@@ -6,6 +6,7 @@
   border-radius: 1rem;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  color: black
 }
 
 /* change default outline border settings when in focus*/
